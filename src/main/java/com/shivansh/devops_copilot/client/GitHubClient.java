@@ -14,15 +14,15 @@ public class GitHubClient {
     public GitHubClient(RestClient.Builder builder) {
         this.restClient = builder
                 .baseUrl("https://api.github.com")
+                .defaultHeader("User-Agent", "DevOps-Copilot-App")
                 .build();
-            }
+    }
 
-    public List<GitHubRepository> getPublicReposioties(String username)
-    {
+    public List<GitHubRepository> getAllByUsername(String username) {
         return restClient.get()
-                .uri("/users/{username}/repos",username)
+                .uri("/users/{username}/repos", username)
                 .retrieve()
-                .body(new ParameterizedTypeReference<List<GitHubRepository>> () {});
+                .body(new ParameterizedTypeReference<List<GitHubRepository>>() {});
     }
 }
 
